@@ -1,0 +1,11 @@
+name = "screener-alerts-mtf"
+main = "worker.py"
+compatibility_date = "2025-12-01"
+compatibility_flags = ["python_workers"]
+
+[triggers]
+# Crons handled by wrapper.js (wrangler-cron.toml) to avoid Pyodide NoGilError
+
+[[kv_namespaces]]
+binding = "KV"
+id = "f3e3966f90c84b7a8fd0f1f49b98d9a6"

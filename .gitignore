@@ -1,0 +1,18 @@
+.wrangler/
+node_modules/
+__pycache__/
+*.txt
+*.json
+*.log
+cloudflare-deploy.md
+fix suggestions.md
+muli-improved/
+opus-tele-monitor/
+# Only include the specific files requested
+!worker.py
+!wrangler.toml
+!wrangler-cron.toml
+!wrapper.js
+!combine.py
+!telegram-msg-reading-guide.md
+!.gitignore

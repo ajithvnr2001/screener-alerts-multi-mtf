@@ -1,0 +1,15 @@
+name = "screener-master-cron"
+main = "wrapper.js"
+compatibility_date = "2025-12-01"
+
+[triggers]
+crons = ["* * * * *"]  # fires every 1 minute
+
+# Service bindings for direct worker-to-worker calls (bypasses network)
+[[services]]
+binding = "MTF_WORKER"
+service = "screener-alerts-mtf"
+
+[[services]]
+binding = "MULTI_WORKER"
+service = "screener-alerts-multi"
