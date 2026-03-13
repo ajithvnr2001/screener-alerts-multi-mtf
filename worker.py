@@ -5,14 +5,14 @@ import json
 import math
 from datetime import datetime, time as dtime, timedelta
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # PRECONFIGURED SCREENERS
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 SCREENERS = [
     {
         "id": "goat1",
-        "name": "GOAT1 ÔÇö Monthly Long Holdings",
+        "name": "GOAT1 — Monthly Long Holdings",
         "url": "https://www.screener.in/screens/3525076/goat1/",
         "query": """Is not SME AND
 Market Capitalization > 200 AND
@@ -47,7 +47,7 @@ Volume > Volume 1month average""",
     },
     {
         "id": "opus-tele",
-        "name": "Opus-Tele ÔÇö Momentum Screen",
+        "name": "Opus-Tele — Momentum Screen",
         "url": "https://www.screener.in/screens/3535927/opus-tele/",
         "query": """Is not SME AND
 Return over 1month > 0 AND
@@ -106,15 +106,15 @@ DEFAULT_SETTINGS = {
     "min_score": 50,
 }
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # TIMEFRAME DEFINITIONS (Yahoo Finance)
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 TIMEFRAMES = {
     "intraday":  {"label": "Intraday (Today)",     "interval": "1m",  "range": "1d",   "candles_min": 20},
-    "d2_3":      {"label": "2ÔÇô3 Days",             "interval": "15m", "range": "5d",   "candles_min": 20},
+    "d2_3":      {"label": "2–3 Days",             "interval": "15m", "range": "5d",   "candles_min": 20},
     "week":      {"label": "1 Week",               "interval": "30m", "range": "1mo",  "candles_min": 20},
-    "w2":        {"label": "1ÔÇô2 Weeks",            "interval": "1h",  "range": "1mo",  "candles_min": 15},
+    "w2":        {"label": "1–2 Weeks",            "interval": "1h",  "range": "1mo",  "candles_min": 15},
     "month":     {"label": "1 Month",              "interval": "1d",  "range": "3mo",  "candles_min": 15},
     "m2":        {"label": "2 Months",             "interval": "1d",  "range": "6mo",  "candles_min": 15},
     "m3":        {"label": "3 Months",             "interval": "1d",  "range": "1y",   "candles_min": 15},
@@ -133,9 +133,9 @@ TF_CANDLE_LIMIT = {
     "m6":       26,     # ~6 months weekly
 }
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # HELPERS & TECHNICAL ANALYSIS ENGINE
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 async def js_fetch(url, method="GET", headers=None, body=None):
     h = Headers.new(to_js(headers or {}))
@@ -172,7 +172,7 @@ def is_entry_window():
 
 def fmt_price(p):
     if p is None: return "N/A"
-    return f"Ôé╣{round(float(p), 2)}"
+    return f"₹{round(float(p), 2)}"
 
 def fmt_pct(a, b):
     try:
@@ -181,9 +181,9 @@ def fmt_pct(a, b):
     except:
         return "N/A"
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # SCREENER.IN SCRAPER
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 def parse_screener_url(company_url):
     """
@@ -211,11 +211,11 @@ def parse_screener_url(company_url):
         # Fallback: take second-to-last non-empty segment
         raw = parts[-2].upper() if len(parts) >= 2 else parts[-1].upper()
 
-    # If the segment is purely numeric ÔåÆ BSE scrip code ÔåÆ use .BO
+    # If the segment is purely numeric → BSE scrip code → use .BO
     if raw.isdigit():
         return raw, "BO"
 
-    # Alphabetic / alphanumeric ÔåÆ NSE symbol ÔåÆ use .NS
+    # Alphabetic / alphanumeric → NSE symbol → use .NS
     return raw, "NS"
 
 async def fetch_screener_results(screener_url, cookie=""):
@@ -247,9 +247,9 @@ async def fetch_screener_results(screener_url, cookie=""):
     except:
         return []
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
-# YAHOO FINANCE ÔÇö MULTI-TIMEFRAME CANDLE FETCH
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
+# YAHOO FINANCE — MULTI-TIMEFRAME CANDLE FETCH
+# ═══════════════════════════════════════════════════════════════════════
 
 def _parse_candles(text, symbol_label):
     """Parse Yahoo Finance JSON into candle list."""
@@ -277,10 +277,17 @@ async def fetch_candles(symbol, exchange, interval, yf_range):
     """
     Fetch OHLCV candles from Yahoo Finance.
     exchange = "NS" (NSE) or "BO" (BSE).
+    If exchange is empty (e.g. index symbols like ^NSEI), use symbol as-is.
     Falls back to the other exchange if primary returns no data.
     """
-    primary   = f"{symbol}.{exchange}"
-    fallback  = f"{symbol}.{'BO' if exchange == 'NS' else 'NS'}"
+    # For index symbols (empty exchange), use symbol directly without suffix
+    if exchange:
+        primary  = f"{symbol}.{exchange}"
+        fallback = f"{symbol}.{'BO' if exchange == 'NS' else 'NS'}"
+    else:
+        primary  = symbol
+        fallback = None
+
     base_url  = "https://query1.finance.yahoo.com/v8/finance/chart"
     params    = f"?interval={interval}&range={yf_range}&includePrePost=false"
 
@@ -294,15 +301,16 @@ async def fetch_candles(symbol, exchange, interval, yf_range):
         if candles:
             return candles, primary
 
-    # Fallback to other exchange
-    status, text = await js_fetch(
-        f"{base_url}/{fallback}{params}",
-        headers={"User-Agent": "Mozilla/5.0"}
-    )
-    if status == 200:
-        candles = _parse_candles(text, fallback)
-        if candles:
-            return candles, fallback
+    # Fallback to other exchange (skip for index symbols)
+    if fallback:
+        status, text = await js_fetch(
+            f"{base_url}/{fallback}{params}",
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
+        if status == 200:
+            candles = _parse_candles(text, fallback)
+            if candles:
+                return candles, fallback
 
     return [], primary  # both failed
 
@@ -326,9 +334,9 @@ async def fetch_all_timeframes(symbol, exchange):
 
     return results, resolved_symbol
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # TECHNICAL INDICATOR LIBRARY  (pure Python, zero external deps)
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 def calc_ema(closes, period):
     if len(closes) < period: return []
@@ -557,10 +565,10 @@ def fetch_nifty_trend(nifty_candles):
     closes = [c["close"] for c in nifty_candles]
     ema50 = last_ema(closes, 50)
     if not ema50: return "Unknown"
-    return "­ƒƒó BULLISH (Above EMA 50)" if closes[-1] > ema50 else "­ƒö┤ BEARISH (Below EMA 50)"
+    return "🟢 BULLISH (Above EMA 50)" if closes[-1] > ema50 else "🔴 BEARISH (Below EMA 50)"
 
 def calc_obv(candles):
-    """On-Balance Volume ÔÇö tracks cumulative volume flow direction."""
+    """On-Balance Volume — tracks cumulative volume flow direction."""
     if len(candles) < 2: return None, None
     obv = 0
     for i in range(1, len(candles)):
@@ -580,7 +588,7 @@ def calc_obv(candles):
     return obv, rising
 
 def calc_cmf(candles, period=20):
-    """Chaikin Money Flow ÔÇö institutional accumulation/distribution."""
+    """Chaikin Money Flow — institutional accumulation/distribution."""
     if len(candles) < period: return None
     recent = candles[-period:]
     mfv_sum = 0
@@ -596,7 +604,7 @@ def calc_cmf(candles, period=20):
     return round(mfv_sum / vol_sum, 4) if vol_sum > 0 else 0
 
 def calc_parabolic_sar(candles, af_start=0.02, af_max=0.20):
-    """Parabolic SAR ÔÇö trend reversal and trailing stop."""
+    """Parabolic SAR — trend reversal and trailing stop."""
     if len(candles) < 3: return None, None
     # Initialize
     is_long = candles[1]["close"] > candles[0]["close"]
@@ -647,9 +655,9 @@ def check_golden_cross(closes):
     if None in [ema50_now, ema200_now, ema50_prev, ema200_prev]:
         return None
     if ema50_now > ema200_now and ema50_prev <= ema200_prev:
-        return "GOLDEN"  # Just crossed ÔÇö extremely bullish
+        return "GOLDEN"  # Just crossed — extremely bullish
     if ema50_now < ema200_now and ema50_prev >= ema200_prev:
-        return "DEATH"   # Just crossed ÔÇö extremely bearish
+        return "DEATH"   # Just crossed — extremely bearish
     if ema50_now > ema200_now:
         return "ABOVE"   # Sustained bullish
     return "BELOW"       # Sustained bearish
@@ -673,11 +681,184 @@ def calc_relative_strength_vs_nifty(stock_candles, nifty_candles, period=22):
     if rs < -5: return rs, "Lagging"
     return rs, "Neutral"
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
+# HIGH-CONVICTION INDICATORS
+# ═══════════════════════════════════════════════════════════════════════
+
+def calc_mfi(candles, period=14):
+    """Money Flow Index — volume-weighted RSI. Combines price + volume."""
+    if len(candles) < period + 1:
+        return None
+    typical_prices = [(c["high"] + c["low"] + c["close"]) / 3 for c in candles]
+    pos_flow = 0
+    neg_flow = 0
+    for i in range(-period, 0):
+        tp = typical_prices[i]
+        tp_prev = typical_prices[i - 1]
+        money_flow = tp * candles[i]["volume"]
+        if tp > tp_prev:
+            pos_flow += money_flow
+        elif tp < tp_prev:
+            neg_flow += money_flow
+    if neg_flow == 0:
+        return 100.0
+    ratio = pos_flow / neg_flow
+    return round(100 - (100 / (1 + ratio)), 2)
+
+def calc_cci(candles, period=20):
+    """Commodity Channel Index — deviation of price from its mean."""
+    if len(candles) < period:
+        return None
+    tp = [(c["high"] + c["low"] + c["close"]) / 3 for c in candles[-period:]]
+    mean_tp = sum(tp) / period
+    mean_dev = sum(abs(t - mean_tp) for t in tp) / period
+    if mean_dev == 0:
+        return 0
+    return round((tp[-1] - mean_tp) / (0.015 * mean_dev), 2)
+
+def calc_keltner(candles, ema_period=20, atr_mult=1.5):
+    """Keltner Channel — ATR-based bands (more reliable than BB for trends)."""
+    if len(candles) < ema_period + 14:
+        return None, None, None
+    closes = [c["close"] for c in candles]
+    mid = last_ema(closes, ema_period)
+    atr = calc_atr(candles, 14)
+    if mid is None or atr is None:
+        return None, None, None
+    upper = round(mid + atr_mult * atr, 2)
+    lower = round(mid - atr_mult * atr, 2)
+    return lower, round(mid, 2), upper
+
+def calc_candle_patterns(candles):
+    """Detect high-probability bullish candlestick patterns in last 3 candles."""
+    if len(candles) < 3:
+        return None
+    def body(c):
+        return abs(c["close"] - c["open"])
+    def upper_wick(c):
+        return c["high"] - max(c["open"], c["close"])
+    def lower_wick(c):
+        return min(c["open"], c["close"]) - c["low"]
+    def is_bullish(c):
+        return c["close"] > c["open"]
+    def is_bearish(c):
+        return c["close"] < c["open"]
+
+    for i in range(-2, 0):
+        prev = candles[i - 1]
+        curr = candles[i]
+        # Bullish Engulfing
+        if (is_bearish(prev) and is_bullish(curr) and
+            curr["open"] <= prev["close"] and curr["close"] >= prev["open"] and
+            body(curr) > body(prev)):
+            return "Bullish Engulfing"
+        # Hammer
+        br = curr["high"] - curr["low"]
+        if br > 0:
+            lw = lower_wick(curr)
+            b = body(curr)
+            if b > 0 and lw >= 2 * b and upper_wick(curr) <= b * 0.5:
+                return "Hammer"
+
+    # Morning Star
+    c1, c2, c3 = candles[-3], candles[-2], candles[-1]
+    if (is_bearish(c1) and body(c1) > 0 and
+        body(c2) < body(c1) * 0.4 and
+        is_bullish(c3) and body(c3) > body(c1) * 0.5 and
+        c3["close"] > (c1["open"] + c1["close"]) / 2):
+        return "Morning Star"
+    return None
+
+def calc_rvol(candles, lookback=20):
+    """Relative Volume — precise ratio of current volume to average."""
+    if len(candles) < lookback + 1:
+        return None
+    avg_vol = sum(c["volume"] for c in candles[-(lookback + 1):-1]) / lookback
+    if avg_vol == 0:
+        return None
+    return round(candles[-1]["volume"] / avg_vol, 2)
+
+def calc_ad_line(candles):
+    """Accumulation/Distribution Line — volume-weighted close position."""
+    if len(candles) < 2:
+        return None, None
+    ad = 0
+    for c in candles:
+        hl = c["high"] - c["low"]
+        if hl == 0:
+            clv = 0
+        else:
+            clv = ((c["close"] - c["low"]) - (c["high"] - c["close"])) / hl
+        ad += clv * c["volume"]
+    # Compare current A/D vs 10 bars ago
+    ad_prev = 0
+    lookback = min(10, len(candles) - 1)
+    for c in candles[:len(candles) - lookback]:
+        hl = c["high"] - c["low"]
+        if hl == 0:
+            clv = 0
+        else:
+            clv = ((c["close"] - c["low"]) - (c["high"] - c["close"])) / hl
+        ad_prev += clv * c["volume"]
+    rising = ad > ad_prev
+    return ad, rising
+
+def calc_rsi_divergence(candles, period=14, lookback=5):
+    """
+    Detect bullish RSI divergence: price makes lower low but RSI makes higher low.
+    Returns: "bullish" | "bearish" | None
+    """
+    closes = [c["close"] for c in candles]
+    if len(closes) < period + lookback * 2 + 1:
+        return None
+
+    recent_slice = closes[-(lookback):]
+    prev_slice   = closes[-(lookback * 2):-lookback]
+
+    recent_low_price = min(recent_slice)
+    prev_low_price   = min(prev_slice)
+
+    rsi_now  = calc_rsi(closes, period)
+    rsi_prev = calc_rsi(closes[:-(lookback)], period)
+
+    if rsi_now is None or rsi_prev is None:
+        return None
+
+    # Bullish divergence: price lower low, RSI higher low
+    if recent_low_price < prev_low_price and rsi_now > rsi_prev:
+        return "bullish"
+    # Bearish divergence: price higher high, RSI lower high
+    recent_high_price = max(recent_slice)
+    prev_high_price   = max(prev_slice)
+    if recent_high_price > prev_high_price and rsi_now < rsi_prev:
+        return "bearish"
+    return None
+
+def calc_52w_high_proximity(candles):
+    """
+    How close is current price to 52-week (or available data) high.
+    Returns (pct_from_high, status).
+    """
+    if len(candles) < 10:
+        return None, None
+    highs = [c["high"] for c in candles]
+    high_52w = max(highs)
+    current  = candles[-1]["close"]
+    if high_52w == 0:
+        return None, None
+    pct = round((current - high_52w) / high_52w * 100, 2)
+    if pct >= -5:
+        return pct, "Near ATH"
+    elif pct >= -15:
+        return pct, "Healthy"
+    elif pct >= -30:
+        return pct, "Pullback"
+    else:
+        return pct, "Deep Correction"
 
 
 # PER-TIMEFRAME ANALYSIS ENGINE
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 def analyze_timeframe(candles, tf_key, price):
     """
@@ -714,6 +895,14 @@ def analyze_timeframe(candles, tf_key, price):
     psar_dir, psar_val     = calc_parabolic_sar(candles)
     gc_status              = check_golden_cross(closes)
     macd_accel             = macd_histogram_accelerating(closes)
+    rsi_div                = calc_rsi_divergence(candles, 14, 5)
+    hi52_pct, hi52_status  = calc_52w_high_proximity(candles)
+    mfi_val                = calc_mfi(candles, 14)
+    cci_val                = calc_cci(candles, 20)
+    kc_lo, kc_mid, kc_hi   = calc_keltner(candles, 20, 1.5)
+    candle_pat             = calc_candle_patterns(candles)
+    rvol_val               = calc_rvol(candles, 20)
+    ad_val, ad_rising      = calc_ad_line(candles)
 
     # ORB + VWAP only for intraday
     orb_hi = orb_lo = vwap = None
@@ -726,161 +915,222 @@ def analyze_timeframe(candles, tf_key, price):
     # 1. Trend Direction (EMA 9 > 21)
     if ema9 and ema21:
         ok = ema9 > ema21
-        checks["Trend (EMA9>21)"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} EMA9({ema9}) {'>' if ok else '<'} EMA21({ema21})")
+        checks["Trend (EMA9>21)"] = (ok, f"{'✅' if ok else '❌'} EMA9({ema9}) {'>' if ok else '<'} EMA21({ema21})")
     else:
-        checks["Trend (EMA9>21)"] = (None, "ÔÅ│ Data insufficient")
+        checks["Trend (EMA9>21)"] = (None, "⏳ Data insufficient")
 
     # 2. EMA Ribbon
     checks["EMA Ribbon"] = (ribbon,
-        "Ô£à 5>13>21>34 bullish stack" if ribbon else "ÔØî EMAs not aligned")
+        "✅ 5>13>21>34 bullish stack" if ribbon else "❌ EMAs not aligned")
 
     # 2b. Ichimoku Cloud
     if spa and spb:
         ok = price > spa and price > spb
-        checks["Ichimoku Cloud"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} Price {'above' if ok else 'in/below'} Cloud")
+        checks["Ichimoku Cloud"] = (ok, f"{'✅' if ok else '❌'} Price {'above' if ok else 'in/below'} Cloud")
     else:
-        checks["Ichimoku Cloud"] = (None, "ÔÅ│ Cloud unavailable")
+        checks["Ichimoku Cloud"] = (None, "⏳ Cloud unavailable")
 
     # 3. Supertrend
     if st_dir is not None:
         checks["Supertrend (7,3)"] = (st_dir==1,
-            f"{'Ô£à Bullish' if st_dir==1 else 'ÔØî Bearish'} @ {fmt_price(st_val)}")
+            f"{'✅ Bullish' if st_dir==1 else '❌ Bearish'} @ {fmt_price(st_val)}")
     else:
-        checks["Supertrend (7,3)"] = (None, "ÔÅ│ Insufficient data")
+        checks["Supertrend (7,3)"] = (None, "⏳ Insufficient data")
 
     # 4. MACD
     if macd_l is not None:
         ok = macd_l > macd_s and macd_h > 0
         checks["MACD"] = (ok,
-            f"{'Ô£à' if ok else 'ÔØî'} Line({macd_l}) vs Signal({macd_s}), Hist({macd_h})")
+            f"{'✅' if ok else '❌'} Line({macd_l}) vs Signal({macd_s}), Hist({macd_h})")
     else:
-        checks["MACD"] = (None, "ÔÅ│ MACD unavailable")
+        checks["MACD"] = (None, "⏳ MACD unavailable")
 
     # 5. RSI Zone
     if rsi is not None:
-        ok = 45 <= rsi <= 70
-        checks["RSI Zone"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} RSI {rsi} ({'bullish zone' if ok else ('OB' if rsi>70 else 'OS' if rsi<30 else 'weak')})")
+        ok = 40 <= rsi <= 75
+        checks["RSI Zone"] = (ok, f"{'✅' if ok else '❌'} RSI {rsi} ({'bullish zone' if ok else ('OB' if rsi>75 else 'OS' if rsi<30 else 'weak')})")
     else:
-        checks["RSI Zone"] = (None, "ÔÅ│ RSI unavailable")
+        checks["RSI Zone"] = (None, "⏳ RSI unavailable")
 
     # 6. Stochastic
     if stk_k is not None and stk_d is not None:
-        ok = stk_k > stk_d and stk_k < 80
-        checks["Stochastic"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} %K({stk_k}) vs %D({stk_d}), {'not OB' if stk_k<80 else 'OVERBOUGHT'}")
+        ok = stk_k > stk_d
+        checks["Stochastic"] = (ok, f"{'✅' if ok else '❌'} %K({stk_k}) vs %D({stk_d})")
     else:
-        checks["Stochastic"] = (None, "ÔÅ│ Stoch unavailable")
+        checks["Stochastic"] = (None, "⏳ Stoch unavailable")
 
     # 6b. Awesome Oscillator
     if ao is not None:
         ok = ao > 0
-        checks["Awesome Osc"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} AO {ao:0.2f}")
+        checks["Awesome Osc"] = (ok, f"{'✅' if ok else '❌'} AO {ao:0.2f}")
     else:
-        checks["Awesome Osc"] = (None, "ÔÅ│ AO unavailable")
+        checks["Awesome Osc"] = (None, "⏳ AO unavailable")
 
     # 7. ADX
     if adx_val is not None:
         ok = adx_val > 20
-        checks["ADX Strength"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} ADX {adx_val} ({'trending' if ok else 'ranging'})")
+        checks["ADX Strength"] = (ok, f"{'✅' if ok else '❌'} ADX {adx_val} ({'trending' if ok else 'ranging'})")
     else:
-        checks["ADX Strength"] = (None, "ÔÅ│ ADX unavailable")
+        checks["ADX Strength"] = (None, "⏳ ADX unavailable")
 
     # 8. Williams %R
     if wr is not None:
         ok = -80 <= wr <= -20
-        checks["Williams %R"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} %R {wr}")
+        checks["Williams %R"] = (ok, f"{'✅' if ok else '❌'} %R {wr}")
     else:
-        checks["Williams %R"] = (None, "ÔÅ│ %R unavailable")
+        checks["Williams %R"] = (None, "⏳ %R unavailable")
 
-    # 9. Bollinger Bands (Squeeze is metadata only ÔÇö NOT scored)
+    # 9. Bollinger Bands (Squeeze is metadata only — NOT scored)
     if bb_lo and bb_mid and bb_hi:
         ok = price > bb_mid and price < bb_hi * 0.99
         checks["Bollinger Bands"] = (ok,
-            f"{'Ô£à' if ok else 'ÔØî'} {bb_lo}/{bb_mid}/{bb_hi}")
+            f"{'✅' if ok else '❌'} {bb_lo}/{bb_mid}/{bb_hi}")
     else:
-        checks["Bollinger Bands"] = (None, "ÔÅ│ BB unavailable")
+        checks["Bollinger Bands"] = (None, "⏳ BB unavailable")
 
     # 10. Price Structure
     checks["HH+HL Structure"] = (hh_hl,
-        "Ô£à Higher Highs + Higher Lows" if hh_hl else "ÔØî No uptrend structure")
+        "✅ Higher Highs + Higher Lows" if hh_hl else "❌ No uptrend structure")
 
     # 11. Volume
     checks["Volume Surge"] = (vol_surge,
-        "Ô£à Volume above average" if vol_surge else "ÔØî Weak/no volume surge")
+        "✅ Volume above average" if vol_surge else "❌ Weak/no volume surge")
 
     # 12. ORB / EMA50 (timeframe-specific)
     if tf_key == "intraday":
         if orb_hi:
             ok = price > orb_hi
-            checks["ORB Breakout"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} {'Above' if ok else 'Below'} ORB {fmt_price(orb_hi)}")
+            checks["ORB Breakout"] = (ok, f"{'✅' if ok else '❌'} {'Above' if ok else 'Below'} ORB {fmt_price(orb_hi)}")
         else:
-            checks["ORB Breakout"] = (None, "ÔÅ│ ORB not formed")
+            checks["ORB Breakout"] = (None, "⏳ ORB not formed")
     else:
         if ema50:
             ok = price > ema50
-            checks["Price > EMA50"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} Price vs EMA50({ema50})")
+            checks["Price > EMA50"] = (ok, f"{'✅' if ok else '❌'} Price vs EMA50({ema50})")
         else:
-            checks["Price > EMA50"] = (None, "ÔÅ│ EMA50 unavailable")
+            checks["Price > EMA50"] = (None, "⏳ EMA50 unavailable")
 
     # 13. VWAP / EMA200 (timeframe-specific)
     if tf_key == "intraday":
         if vwap:
             ok = price > vwap
-            checks["VWAP"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} {'Above' if ok else 'Below'} VWAP {fmt_price(vwap)}")
+            checks["VWAP"] = (ok, f"{'✅' if ok else '❌'} {'Above' if ok else 'Below'} VWAP {fmt_price(vwap)}")
         else:
-            checks["VWAP"] = (None, "ÔÅ│ VWAP unavailable")
+            checks["VWAP"] = (None, "⏳ VWAP unavailable")
     else:
         if ema200:
             ok = price > ema200
-            checks["Price > EMA200"] = (ok, f"{'Ô£à' if ok else 'ÔØî'} Price vs EMA200({ema200})")
+            checks["Price > EMA200"] = (ok, f"{'✅' if ok else '❌'} Price vs EMA200({ema200})")
         else:
-            checks["Price > EMA200"] = (None, "ÔÅ│ EMA200 unavailable")
+            checks["Price > EMA200"] = (None, "⏳ EMA200 unavailable")
 
     # 14. OBV (On-Balance Volume)
     if obv_rising is not None:
         checks["OBV Trend"] = (obv_rising,
-            f"{'Ô£à' if obv_rising else 'ÔØî'} Volume {'flowing in' if obv_rising else 'flowing out'}")
+            f"{'✅' if obv_rising else '❌'} Volume {'flowing in' if obv_rising else 'flowing out'}")
     else:
-        checks["OBV Trend"] = (None, "ÔÅ│ OBV unavailable")
+        checks["OBV Trend"] = (None, "⏳ OBV unavailable")
 
     # 15. Chaikin Money Flow
     if cmf_val is not None:
-        ok = cmf_val > 0.05
+        ok = cmf_val > 0
         checks["CMF (Money Flow)"] = (ok,
-            f"{'Ô£à' if ok else 'ÔØî'} CMF {cmf_val} ({'Institutional buying' if ok else 'Selling pressure'})")
+            f"{'✅' if ok else '❌'} CMF {cmf_val} ({'Net buying' if ok else 'Net selling'})")
     else:
-        checks["CMF (Money Flow)"] = (None, "ÔÅ│ CMF unavailable")
+        checks["CMF (Money Flow)"] = (None, "⏳ CMF unavailable")
 
     # 16. Parabolic SAR
     if psar_dir is not None:
         ok = psar_dir == 1
         checks["Parabolic SAR"] = (ok,
-            f"{'Ô£à' if ok else 'ÔØî'} SAR {'below price (bullish)' if ok else 'above price (bearish)'} @ {fmt_price(psar_val)}")
+            f"{'✅' if ok else '❌'} SAR {'below price (bullish)' if ok else 'above price (bearish)'} @ {fmt_price(psar_val)}")
     else:
-        checks["Parabolic SAR"] = (None, "ÔÅ│ PSAR unavailable")
+        checks["Parabolic SAR"] = (None, "⏳ PSAR unavailable")
 
     # 17. MACD Histogram Acceleration
     if macd_accel is not None:
         checks["MACD Momentum"] = (macd_accel,
-            f"{'Ô£à' if macd_accel else 'ÔØî'} Histogram {'accelerating Ôåù' if macd_accel else 'decelerating Ôåÿ'}")
+            f"{'✅' if macd_accel else '❌'} Histogram {'accelerating ↑' if macd_accel else 'decelerating ↓'}")
     else:
-        checks["MACD Momentum"] = (None, "ÔÅ│ MACD accel unavailable")
+        checks["MACD Momentum"] = (None, "⏳ MACD accel unavailable")
 
     # 18. Golden/Death Cross
     if gc_status is not None:
         ok = gc_status in ["GOLDEN", "ABOVE"]
-        label = {"GOLDEN": "­ƒÅå Just crossed! (Golden Cross)", "ABOVE": "Ô£à EMA50 > EMA200",
-                 "DEATH": "­ƒÆÇ Death Cross!", "BELOW": "ÔØî EMA50 < EMA200"}
-        checks["Golden Cross"] = (ok, label.get(gc_status, "ÔØî"))
+        label = {"GOLDEN": "🏅 Just crossed! (Golden Cross)", "ABOVE": "✅ EMA50 > EMA200",
+                 "DEATH": "💀 Death Cross!", "BELOW": "❌ EMA50 < EMA200"}
+        checks["Golden Cross"] = (ok, label.get(gc_status, "❌"))
     else:
-        checks["Golden Cross"] = (None, "ÔÅ│ Need 200+ periods")
+        checks["Golden Cross"] = (None, "⏳ Need 200+ periods")
 
     # 19. Fibonacci Position
     if fib_lvls and len(fib_lvls) >= 3:
         ok = price > fib_lvls[2]  # Above 50% retracement = bullish
         checks["Fib Position"] = (ok,
-            f"{'Ô£à' if ok else 'ÔØî'} Price {'above' if ok else 'below'} Fib 50% ({fib_lvls[2]})")
+            f"{'✅' if ok else '❌'} Price {'above' if ok else 'below'} Fib 50% ({fib_lvls[2]})")
     else:
-        checks["Fib Position"] = (None, "ÔÅ│ Fib unavailable")
+        checks["Fib Position"] = (None, "⏳ Fib unavailable")
+
+    # 20. RSI Divergence
+    if rsi_div is not None:
+        ok = rsi_div == "bullish"
+        checks["RSI Divergence"] = (ok,
+            f"{'✅ Bullish divergence detected!' if ok else '❌ Bearish divergence — caution'}")
+    else:
+        checks["RSI Divergence"] = (None, "⏳ No divergence")
+
+    # 21. 52-Week High Proximity
+    if hi52_pct is not None:
+        ok = hi52_status in ["Near ATH", "Healthy"]
+        checks["52W High"] = (ok,
+            f"{'✅' if ok else '❌'} {hi52_pct:+.1f}% from high ({hi52_status})")
+    else:
+        checks["52W High"] = (None, "⏳ Insufficient history")
+
+    # 22. Money Flow Index (MFI)
+    if mfi_val is not None:
+        ok = 20 <= mfi_val <= 80
+        checks["MFI"] = (ok,
+            f"{'✅' if ok else '❌'} MFI {mfi_val} ({'healthy flow' if ok else ('OB' if mfi_val>80 else 'OS')})")
+    else:
+        checks["MFI"] = (None, "⏳ MFI unavailable")
+
+    # 23. CCI
+    if cci_val is not None:
+        ok = 0 < cci_val < 200
+        checks["CCI"] = (ok,
+            f"{'✅' if ok else '❌'} CCI {cci_val} ({'bullish momentum' if ok else ('extreme' if cci_val>=200 else 'bearish')})")
+    else:
+        checks["CCI"] = (None, "⏳ CCI unavailable")
+
+    # 24. Keltner Channel
+    if kc_lo and kc_mid and kc_hi:
+        ok = price > kc_mid and price < kc_hi
+        checks["Keltner Channel"] = (ok,
+            f"{'✅' if ok else '❌'} Price {'in trend zone' if ok else ('above upper KC' if price >= kc_hi else 'below mid KC')}")
+    else:
+        checks["Keltner Channel"] = (None, "⏳ KC unavailable")
+
+    # 25. Candlestick Pattern
+    if candle_pat:
+        checks["Candle Pattern"] = (True, f"✅ {candle_pat} detected!")
+    else:
+        checks["Candle Pattern"] = (None, "⏳ No pattern")
+
+    # 26. Relative Volume (RVOL)
+    if rvol_val is not None:
+        ok = rvol_val >= 1.2
+        checks["RVOL"] = (ok,
+            f"{'✅' if ok else '❌'} RVOL {rvol_val}x ({'strong participation' if ok else 'low interest'})")
+    else:
+        checks["RVOL"] = (None, "⏳ RVOL unavailable")
+
+    # 27. Accumulation/Distribution
+    if ad_rising is not None:
+        checks["A/D Line"] = (ad_rising,
+            f"{'✅' if ad_rising else '❌'} {'Accumulation (smart money in)' if ad_rising else 'Distribution (selling)'}")
+    else:
+        checks["A/D Line"] = (None, "⏳ A/D unavailable")
 
     # SCORE
     scored = {k: v for k, v in checks.items() if v[0] is not None}
@@ -916,8 +1166,8 @@ def analyze_timeframe(candles, tf_key, price):
             sl = round(pivots["S1"] * 0.998, 2)
 
     # Buy zone and sell zone
-    buy_zone  = f"{fmt_price(sl)} ÔÇô {fmt_price(round(price*1.005,2))}" if sl else "N/A"
-    sell_zone = f"{fmt_price(t1)} ÔÇô {fmt_price(t2)}"                   if t1 else "N/A"
+    buy_zone  = f"{fmt_price(sl)} – {fmt_price(round(price*1.005,2))}" if sl else "N/A"
+    sell_zone = f"{fmt_price(t1)} – {fmt_price(t2)}"                   if t1 else "N/A"
 
     # Timing recommendation
     timing = _get_timing_recommendation(tf_key, signal, pct)
@@ -972,55 +1222,55 @@ def _get_timing_recommendation(tf_key, signal, score_pct):
     day = now.weekday()  # 0=Mon, 4=Fri
 
     if score_pct < 43:
-        return {"action": "AVOID", "buy_when": "Do not enter ÔÇö too many negatives", "sell_when": "N/A", "hold_duration": "N/A"}
+        return {"action": "AVOID", "buy_when": "Do not enter — too many negatives", "sell_when": "N/A", "hold_duration": "N/A"}
 
     timing_map = {
         "intraday": {
-            "buy_when":       "Enter 9:30ÔÇô10:15 AM on ORB breakout candle close, OR 2:00ÔÇô2:30 PM on volume surge",
-            "sell_when":      "Exit by 3:00ÔÇô3:10 PM same day, or on target hit",
+            "buy_when":       "Enter 9:30–10:15 AM on ORB breakout candle close, OR 2:00–2:30 PM on volume surge",
+            "sell_when":      "Exit by 3:00–3:10 PM same day, or on target hit",
             "hold_duration":  "Same day (close all positions by 3:10 PM)",
-            "avoid":          "Avoid entry after 2:45 PM or during 12:00ÔÇô1:30 PM dead zone",
+            "avoid":          "Avoid entry after 2:45 PM or during 12:00–1:30 PM dead zone",
         },
         "d2_3": {
             "buy_when":       "Enter on 15-min chart breakout above recent high with volume, best in morning session",
-            "sell_when":      "Exit on next 1ÔÇô2 day rally or if daily close below entry",
-            "hold_duration":  "2ÔÇô3 trading days",
+            "sell_when":      "Exit on next 1–2 day rally or if daily close below entry",
+            "hold_duration":  "2–3 trading days",
             "avoid":          "Avoid entering on Friday (weekend gap risk)",
         },
         "week": {
             "buy_when":       "Enter on daily candle close above resistance with volume",
             "sell_when":      "Exit at weekly R1/R2 pivot or on RSI > 70",
-            "hold_duration":  "5ÔÇô7 trading days (1 week)",
+            "hold_duration":  "5–7 trading days (1 week)",
             "avoid":          "Avoid chasing if already up >5% in a day",
         },
         "w2": {
-            "buy_when":       "Enter on pullback to EMA21 or 50 with RSI 50ÔÇô60 reversal",
-            "sell_when":      "Exit at ATR 2xÔÇô3x target or on MACD cross-down",
-            "hold_duration":  "1ÔÇô2 weeks",
+            "buy_when":       "Enter on pullback to EMA21 or 50 with RSI 50–60 reversal",
+            "sell_when":      "Exit at ATR 2x–3x target or on MACD cross-down",
+            "hold_duration":  "1–2 weeks",
             "avoid":          "Avoid entering if result season starts within 1 week",
         },
         "month": {
             "buy_when":       "Enter on first 3 days of the month on daily breakout above 20-day high",
             "sell_when":      "Exit on monthly R1 pivot hit or RSI > 70 on daily",
-            "hold_duration":  "3ÔÇô4 weeks",
+            "hold_duration":  "3–4 weeks",
             "avoid":          "Avoid in last week of month (window dressing / mutual fund selling)",
         },
         "m2": {
             "buy_when":       "Enter on weekly close above key resistance with EMA ribbon aligned",
             "sell_when":      "Scale out 50% at T1, remaining at T2, trail stop from T1",
-            "hold_duration":  "6ÔÇô8 weeks",
+            "hold_duration":  "6–8 weeks",
             "avoid":          "Avoid if broad market (Nifty) in downtrend",
         },
         "m3": {
             "buy_when":       "Enter on quarterly trend breakout, EMA50 as base support",
             "sell_when":      "Exit at T2/T3 targets or on quarterly earnings disappointment",
-            "hold_duration":  "2ÔÇô3 months",
-            "avoid":          "Avoid in MayÔÇôJune (pre-budget uncertainty) or SepÔÇôOct (FII outflows)",
+            "hold_duration":  "2–3 months",
+            "avoid":          "Avoid in May–June (pre-budget uncertainty) or Sep–Oct (FII outflows)",
         },
         "m6": {
             "buy_when":       "Enter on major breakout from base/accumulation zone on weekly chart",
             "sell_when":      "Trail stop below weekly EMA21; exit in stages at T1, T2, T3",
-            "hold_duration":  "4ÔÇô6 months",
+            "hold_duration":  "4–6 months",
             "avoid":          "Avoid buying if weekly RSI > 70 already (wait for pullback to EMA)",
         },
     }
@@ -1031,30 +1281,30 @@ def _get_timing_recommendation(tf_key, signal, score_pct):
     # Real-time overlay
     if tf_key == "intraday":
         if dtime(9, 15) <= t <= dtime(9, 30):
-            rec["now"] = "ÔÅ│ ORB forming ÔÇö watch, don't trade yet"
+            rec["now"] = "⏳ ORB forming — watch, don't trade yet"
         elif dtime(9, 30) <= t <= dtime(11, 30):
-            rec["now"] = "­ƒƒó PRIME entry window ÔÇö confirm breakout then enter"
+            rec["now"] = "🟢 PRIME entry window — confirm breakout then enter"
         elif dtime(11, 30) <= t <= dtime(13, 30):
-            rec["now"] = "­ƒƒí Dead zone ÔÇö avoid new entries, manage existing"
+            rec["now"] = "🟡 Dead zone — avoid new entries, manage existing"
         elif dtime(14, 0) <= t <= dtime(14, 45):
-            rec["now"] = "­ƒƒó Second entry window active"
+            rec["now"] = "🟢 Second entry window active"
         elif dtime(14, 45) <= t <= dtime(15, 10):
-            rec["now"] = "­ƒƒí Exit zone ÔÇö close positions, don't enter"
+            rec["now"] = "🟡 Exit zone — close positions, don't enter"
         else:
-            rec["now"] = "­ƒö┤ Market closed or pre-open"
+            rec["now"] = "🔴 Market closed or pre-open"
     else:
         if day == 0:
-            rec["now"] = "­ƒôà Monday ÔÇö good day to initiate fresh positions"
+            rec["now"] = "📅 Monday — good day to initiate fresh positions"
         elif day == 4:
-            rec["now"] = "­ƒôà Friday ÔÇö consider booking partial profits, weekend risk"
+            rec["now"] = "📅 Friday — consider booking partial profits, weekend risk"
         else:
-            rec["now"] = "­ƒôà Mid-week ÔÇö valid entry day"
+            rec["now"] = "📅 Mid-week — valid entry day"
 
     return rec
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # MASTER MULTI-TIMEFRAME AGGREGATOR
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 def aggregate_mtf(tf_results, price):
     """
@@ -1078,12 +1328,12 @@ def aggregate_mtf(tf_results, price):
 
     overall_pct = round(bullish_weight/total_weight*100) if total_weight else 0
 
-    if   overall_pct >= 90: master = "­ƒÆÄ DIAMOND ALERT ÔÇö High Accuracy Setup"
-    elif overall_pct >= 80: master = "­ƒöÑ STRONG BUY  ÔÇö All timeframes aligned"
-    elif overall_pct >= 65: master = "Ô£à BUY         ÔÇö Most timeframes bullish"
-    elif overall_pct >= 50: master = "­ƒƒí WEAK BUY   ÔÇö Mixed signals, caution"
-    elif overall_pct >= 35: master = "­ƒƒá NEUTRAL    ÔÇö Wait for clarity"
-    else:                   master = "­ƒÜ½ AVOID      ÔÇö Bearish across timeframes"
+    if   overall_pct >= 90: master = "💎 DIAMOND ALERT — High Accuracy Setup"
+    elif overall_pct >= 80: master = "🔥 STRONG BUY  — All timeframes aligned"
+    elif overall_pct >= 65: master = "✅ BUY         — Most timeframes bullish"
+    elif overall_pct >= 50: master = "🟡 WEAK BUY   — Mixed signals, caution"
+    elif overall_pct >= 35: master = "🟠 NEUTRAL    — Wait for clarity"
+    else:                   master = "🚫 AVOID      — Bearish across timeframes"
 
     # Best timeframe to act on
     best_tf = max(
@@ -1103,6 +1353,15 @@ def aggregate_mtf(tf_results, price):
        price and price > tf_results["intraday"]["vwap"]:
         buy_confluences.append("Price above VWAP")
 
+    # MTF RSI alignment bonus: if RSI bullish on 6+ timeframes, boost conviction
+    rsi_bullish_count = sum(
+        1 for r in tf_results.values()
+        if r.get("rsi") and 40 <= r["rsi"] <= 75 and not r.get("error")
+    )
+    if rsi_bullish_count >= 6:
+        buy_confluences.append(f"RSI bullish on {rsi_bullish_count}/8 timeframes")
+        overall_pct = min(100, overall_pct + 5)  # 5% bonus
+
     return {
         "overall_pct":   overall_pct,
         "master_signal": master,
@@ -1111,9 +1370,9 @@ def aggregate_mtf(tf_results, price):
         "confluences":   buy_confluences,
     }
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
-# ENRICH STOCK ÔÇö FULL MTF ANALYSIS
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
+# ENRICH STOCK — FULL MTF ANALYSIS
+# ═══════════════════════════════════════════════════════════════════════
 
 async def enrich_stock(stock, nifty_candles=None):
     symbol   = stock.get("symbol", "")
@@ -1122,7 +1381,7 @@ async def enrich_stock(stock, nifty_candles=None):
     if not symbol:
         return stock
 
-    # Fetch all 8 timeframes ÔÇö passes correct exchange suffix, auto-fallback built in
+    # Fetch all 8 timeframes — passes correct exchange suffix, auto-fallback built in
     all_candles, resolved_sym = await fetch_all_timeframes(symbol, exchange)
 
     # Use Yahoo Finance latest price if screener.in price is 0
@@ -1162,10 +1421,10 @@ async def enrich_stock(stock, nifty_candles=None):
     stock["bb_sqz_meta"]    = tf_results.get("month", {}).get("bb_sqz", False)
     return stock
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # TELEGRAM MESSAGE FORMATTER
 # Each stock = 2 messages (overview + details) to stay under Telegram 4096 limit
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 def format_master_alert(stock, screener_name, nifty_trend="Unknown"):
     name      = stock.get("name", "")
@@ -1181,15 +1440,15 @@ def format_master_alert(stock, screener_name, nifty_trend="Unknown"):
     master_sig = mtf.get("master_signal", "")
     is_diamond = "DIAMOND" in master_sig
     
-    stars = "Ô¡É´©Å" * (overall // 20) + ( "Ô¡É´©Å" if overall % 20 >= 10 else "" )
-    if not stars: stars = "Ô¡É´©Å"
+    stars = "⭐️" * (overall // 20) if overall >= 20 else ""
+    if not stars: stars = "❌"
     
     best_tf = mtf.get("best_timeframe", "d2_3")
     br = tfa.get(best_tf, {})
     
     # Volume Check
     vol_surge = br.get("checks", {}).get("Volume Surge", {}).get("pass", False)
-    vol_text = "­ƒöÑ High" if vol_surge else "Normal"
+    vol_text = "🔥 High" if vol_surge else "Normal"
     
     rsi = br.get("rsi", "N/A")
     atr = br.get("atr") or 1
@@ -1204,52 +1463,52 @@ def format_master_alert(stock, screener_name, nifty_trend="Unknown"):
     s3 = round(s2 - atr, 2)
     
     # Relative Strength
-    rs_icon = "­ƒƒó" if rs_data.get("status") == "Leading" else ("­ƒö┤" if rs_data.get("status") == "Lagging" else "­ƒƒí")
+    rs_icon = "🟢" if rs_data.get("status") == "Leading" else ("🔴" if rs_data.get("status") == "Lagging" else "🟡")
     rs_text = f"{rs_icon} {rs_data.get('status', 'N/A')} ({rs_data.get('value', 0):+.1f}% vs Nifty)"
     
     # BB Squeeze alert
-    sqz_text = "­ƒöÑ BB SQUEEZE DETECTED ÔÇö Breakout imminent!" if bb_sqz else ""
+    sqz_text = "🔥 BB SQUEEZE DETECTED — Breakout imminent!" if bb_sqz else ""
     
     lines = [
-        f"{'­ƒÆÄ' if is_diamond else '­ƒöÑ'} <b>{master_sig}: {name} ({symbol})</b>",
-        f"­ƒÆ░ <b>Ôé╣{round(price, 2)}</b> | Vol: {vol_text} | {21} Checks",
+        f"{'💎' if is_diamond else '🔥'} <b>{master_sig}: {name} ({symbol})</b>",
+        f"💰 <b>₹{round(price, 2)}</b> | Vol: {vol_text} | {br.get('max_score', 21)} Checks",
         "",
-        "ÔöÇÔöÇÔöÇ <b>1. THE MARKET PULSE</b> ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ",
-        f"­ƒôê <b>Nifty:</b> {nifty_trend}",
-        f"­ƒôè <b>Conviction:</b> {stars} ({overall}%)",
-        f"­ƒÅ╣ <b>Status:</b> {'Breakout' if vol_surge else 'Consol.'} (RSI: {rsi})",
-        f"­ƒÆ¬ <b>Strength:</b> {rs_text}",
+        "─── <b>1. THE MARKET PULSE</b> ─────────",
+        f"📊 <b>Nifty:</b> {nifty_trend}",
+        f"📈 <b>Conviction:</b> {stars} ({overall}%)",
+        f"🏹 <b>Status:</b> {'Breakout' if vol_surge else 'Consol.'} (RSI: {rsi})",
+        f"💪 <b>Strength:</b> {rs_text}",
     ]
     
     if sqz_text:
-        lines.append(f"ÔÜí {sqz_text}")
+        lines.append(f"⚡ {sqz_text}")
     
     lines += [
         "",
-        "ÔöÇÔöÇÔöÇ <b>2. HOLDING SCENARIOS</b> ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ",
-        f"­ƒÜÇ <b>Today</b>  ÔåÆ {fmt_price(scenarios.get('Today',{}).get('target'))} | Exit {scenarios.get('Today',{}).get('exit','3:15 PM')}",
-        f"­ƒôà <b>2 Days</b> ÔåÆ {fmt_price(scenarios.get('2 Days',{}).get('target'))} | Exit {scenarios.get('2 Days',{}).get('exit','-')}",
-        f"­ƒùô´©Å <b>1 Week</b> ÔåÆ {fmt_price(scenarios.get('1 Week',{}).get('target'))} | Exit {scenarios.get('1 Week',{}).get('exit','-')}",
-        f"­ƒîò <b>1 Month</b>ÔåÆ {fmt_price(scenarios.get('1 Month',{}).get('target'))} | Exit {scenarios.get('1 Month',{}).get('exit','-')}",
+        "─── <b>2. HOLDING SCENARIOS</b> ─────────",
+        f"🚀 <b>Today</b>  → {fmt_price(scenarios.get('Today',{}).get('target'))} | Exit {scenarios.get('Today',{}).get('exit','3:15 PM')}",
+        f"📅 <b>2 Days</b> → {fmt_price(scenarios.get('2 Days',{}).get('target'))} | Exit {scenarios.get('2 Days',{}).get('exit','-')}",
+        f"🗓️ <b>1 Week</b> → {fmt_price(scenarios.get('1 Week',{}).get('target'))} | Exit {scenarios.get('1 Week',{}).get('exit','-')}",
+        f"🌒 <b>1 Month</b>→ {fmt_price(scenarios.get('1 Month',{}).get('target'))} | Exit {scenarios.get('1 Month',{}).get('exit','-')}",
         "",
-        "ÔöÇÔöÇÔöÇ <b>3. TECHNICAL WALLS</b> ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ",
-        f"­ƒÜÇ <b>R3:</b> {fmt_price(r3)} | ­ƒƒó <b>S1:</b> {fmt_price(s1)} (BUY ZONE)",
-        f"­ƒÄ» <b>R2:</b> {fmt_price(r2)} | ­ƒƒí <b>S2:</b> {fmt_price(s2)} (STOP LOSS)",
-        f"­ƒÄ» <b>R1:</b> {fmt_price(r1)} | ­ƒƒá <b>S3:</b> {fmt_price(s3)} (Danger)",
+        "─── <b>3. TECHNICAL WALLS</b> ───────────",
+        f"🚀 <b>R3:</b> {fmt_price(r3)} | 🟢 <b>S1:</b> {fmt_price(s1)} (BUY ZONE)",
+        f"🎻 <b>R2:</b> {fmt_price(r2)} | 🟡 <b>S2:</b> {fmt_price(s2)} (STOP LOSS)",
+        f"🎻 <b>R1:</b> {fmt_price(r1)} | 🟠 <b>S3:</b> {fmt_price(s3)} (Danger)",
         "",
-        "ÔöÇÔöÇÔöÇ <b>4. YOUR ACTION ROADMAP</b> ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ",
-        f"Ô£à <b>BUY:</b> Between {fmt_price(s1)} ÔÇô {fmt_price(price)}",
-        f"ÔÅ│ <b>HOLD:</b> {br.get('timing',{}).get('hold_duration', '2-5 Days')}",
-        f"­ƒøí´©Å <b>DEFEND:</b> At {fmt_price(r1)}, move Stop to entry",
-        f"­ƒÆ░ <b>EXIT:</b> 50% at {fmt_price(r2)}, rest at {fmt_price(r3)}",
+        "─── <b>4. YOUR ACTION ROADMAP</b> ─────────",
+        f"✅ <b>BUY:</b> Between {fmt_price(s1)} – {fmt_price(price)}",
+        f"⏳ <b>HOLD:</b> {br.get('timing',{}).get('hold_duration', '2-5 Days')}",
+        f"🛡️ <b>DEFEND:</b> At {fmt_price(r1)}, move Stop to entry",
+        f"💰 <b>EXIT:</b> 50% at {fmt_price(r2)}, rest at {fmt_price(r3)}",
         "",
-        f"<i>{screener_name}</i> | ­ƒòÉ {ist_now().strftime('%d-%b %H:%M IST')}"
+        f"<i>{screener_name}</i> | 🕐 {ist_now().strftime('%d-%b %H:%M IST')}"
     ]
     return "\n".join(lines)
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # TELEGRAM SENDER
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 async def send_telegram(token, chat_id, message):
     import asyncio
@@ -1277,9 +1536,9 @@ async def send_stock_alerts(token, chat_id, stock, screener_name, nifty_trend="U
     msg1 = format_master_alert(stock, screener_name, nifty_trend)
     await send_telegram(token, chat_id, msg1)
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # SCREENER.IN HTML PARSER
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 def extract_csrf(html):
     for line in html.split("\n"):
@@ -1339,9 +1598,9 @@ def extract_between(s, start, end):
 
 
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════════
 # MAIN WORKER CLASS
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════════
 
 class Default(WorkerEntrypoint):
 
@@ -1408,17 +1667,17 @@ class Default(WorkerEntrypoint):
             await self.env.KV.put("telegram_accounts", json.dumps(accts))
             return self._json({"ok": True, "accounts": accts})
 
-        # ÔöÇÔöÇ API: Test Telegram ÔöÇÔöÇ
+        # ── API: Test Telegram ──
         if "/api/test" in url and method == "POST":
             try:
                 accts = await self._get_telegram_accounts()
                 for a in accts:
-                    await send_telegram(a["token"], a["chat_id"], "Ô£à <b>Test from screener-alerts-mtf</b>\nTelegram connection works!")
+                    await send_telegram(a["token"], a["chat_id"], "✅ <b>Test from screener-alerts-mtf</b>\nTelegram connection works!")
                 return self._json({"ok": True, "sent_to": len(accts)})
             except Exception as e:
                 return self._json({"ok": False, "error": str(e)})
 
-        # ÔöÇÔöÇ API: Debug Yahoo Finance directly ÔöÇÔöÇ
+        # ── API: Debug Yahoo Finance directly ──
         if "/api/debug_yf" in url and method == "GET":
             # Extract q params manually
             try:
@@ -1446,7 +1705,7 @@ class Default(WorkerEntrypoint):
             except Exception as e:
                 return self._json({"error": str(e)})
 
-        # ÔöÇÔöÇ API: Clear prev_names (reset) ÔöÇÔöÇ
+        # ── API: Clear prev_names (reset) ──
         if "/api/clear" in url and method == "POST":
             screeners = await self._get_screeners()
             for s in screeners:
@@ -1455,7 +1714,7 @@ class Default(WorkerEntrypoint):
                 except: pass
             return self._json({"ok": True, "cleared": len(screeners)})
 
-        # ÔöÇÔöÇ API: Debug (run scraper with full diagnostics) ÔöÇÔöÇ
+        # ── API: Debug (run scraper with full diagnostics) ──
         if "/api/debug" in url and method == "POST":
             debug = {"steps": []}
             screeners = await self._get_screeners()
@@ -1577,10 +1836,10 @@ class Default(WorkerEntrypoint):
         return Response(DASHBOARD_HTML, headers={"Content-Type": "text/html"})
 
     async def scheduled(self, event, env, ctx):
-        """Per-screener scheduling ÔÇö runs ONE screener per cron cycle (most overdue first)."""
+        """Per-screener scheduling — runs ONE screener per cron cycle (most overdue first)."""
         settings = await self._get_settings()
         if not settings.get("enabled", True):
-            print("CRON: Global power OFF ÔÇö skipping all")
+            print("CRON: Global power OFF — skipping all")
             return
         from datetime import datetime, timezone, timedelta
         IST = timezone(timedelta(hours=5, minutes=30))
@@ -1597,18 +1856,18 @@ class Default(WorkerEntrypoint):
         for s in screeners:
             sid = s.get("id", "?")
             if not s.get("enabled", True):
-                print(f"CRON [{sid}]: SKIP ÔÇö disabled")
+                print(f"CRON [{sid}]: SKIP — disabled")
                 continue
             if not self._in_time_window(s, now_m, today):
-                print(f"CRON [{sid}]: SKIP ÔÇö outside window {s.get('start_time','?')}-{s.get('end_time','?')}")
+                print(f"CRON [{sid}]: SKIP — outside window {s.get('start_time','?')}-{s.get('end_time','?')}")
                 continue
             s_interval = int(s.get("interval_minutes", 5))
             s_last = int(s.get("last_run_epoch", 0))
             elapsed = (now_epoch - s_last) / 60 if s_last else 9999
             if elapsed < s_interval:
-                print(f"CRON [{sid}]: SKIP ÔÇö interval {s_interval}m, elapsed {elapsed:.1f}m")
+                print(f"CRON [{sid}]: SKIP — interval {s_interval}m, elapsed {elapsed:.1f}m")
                 continue
-            # This screener is eligible ÔÇö pick the most overdue one
+            # This screener is eligible — pick the most overdue one
             overdue = elapsed - s_interval
             if overdue > best_overdue:
                 best = s
@@ -1624,7 +1883,7 @@ class Default(WorkerEntrypoint):
             fresh["last_run"] = now.isoformat()
             fresh["total_runs"] = fresh.get("total_runs", 0) + 1
             await self.env.KV.put("settings", json.dumps(fresh))
-            print(f"CRON: Done ÔÇö total_runs={fresh['total_runs']}")
+            print(f"CRON: Done — total_runs={fresh['total_runs']}")
         else:
             print("CRON: No screeners due this cycle")
 
@@ -1736,9 +1995,11 @@ class Default(WorkerEntrypoint):
 
             sent_count = 0
             nifty_trend = "Unknown"
+            nifty_candles = []
             if curr_names:
-                nifty_candles, _ = await fetch_candles("%5ENSEI", "", "1d", "3mo")
+                nifty_candles, _ = await fetch_candles("^NSEI", "", "1d", "3mo")
                 nifty_trend = fetch_nifty_trend(nifty_candles)
+                print(f"NIFTY: Fetched {len(nifty_candles)} candles, trend={nifty_trend}")
 
                 for row in rows:
                     d = dict(zip(headers_row, row))
@@ -1759,17 +2020,17 @@ class Default(WorkerEntrypoint):
 
             if exited:
                 await self._send_all(
-                    f"­ƒôè <b>{scr_name}</b>\n"
-                    f"­ƒÜ¬ <b>EXITED:</b> {', '.join(exited)}\n"
-                    f"­ƒòÉ {now_str}"
+                    f"📈 <b>{scr_name}</b>\n"
+                    f"🚬 <b>EXITED:</b> {', '.join(exited)}\n"
+                    f"🕐 {now_str}"
                 )
 
             # ALWAYS send a summary message
             await self._send_all(
-                f"­ƒôè <b>{scr_name}</b>\n"
-                f"Ô£à Cron run complete\n"
-                f"­ƒôê Stocks found: <b>{len(rows)}</b> | Alerts sent: <b>{sent_count}</b>\n"
-                f"­ƒòÉ {now_str}"
+                f"📈 <b>{scr_name}</b>\n"
+                f"✅ Cron run complete\n"
+                f"📊 Stocks found: <b>{len(rows)}</b> | Alerts sent: <b>{sent_count}</b>\n"
+                f"🕐 {now_str}"
             )
 
             await self.env.KV.put(prev_key, json.dumps(curr_names))
@@ -1777,24 +2038,24 @@ class Default(WorkerEntrypoint):
         except Exception as e:
             try:
                 await self._send_all(
-                    f"­ƒôè <b>{scr_name}</b>\n"
-                    f"ÔØî <b>Error:</b> {str(e)[:200]}\n"
-                    f"­ƒòÉ {now_str}"
+                    f"📈 <b>{scr_name}</b>\n"
+                    f"❌ <b>Error:</b> {str(e)[:200]}\n"
+                    f"🕐 {now_str}"
                 )
             except:
                 pass
 
 
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 # DASHBOARD HTML
-# ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+# ═══════════════════════════════════════════════════════════════════════
 
 DASHBOARD_HTML = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Screener Alerts ÔÇö MTF</title>
+<title>Screener Alerts — MTF</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1891,8 +2152,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-hei
 <body>
 <div class="c">
   <div class="hdr">
-    <h1>­ƒôê <span>Screener Alerts</span> MTF</h1>
-    <p>Multi-Timeframe Technical Analysis ÔÇó 8 TFs ├ù 21 Checks ÔåÆ Telegram</p>
+    <h1>📊 <span>Screener Alerts</span> MTF</h1>
+    <p>Multi-Timeframe Technical Analysis ÔÇó 8 TFs ├ù 21 Checks → Telegram</p>
   </div>
 
   <div class="sbar">
@@ -1940,11 +2201,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-hei
 
   <!-- Actions -->
   <div class="brow">
-    <button class="btn bp" id="trigBtn" onclick="trigNow()">ÔÜí Run All Now <div class="spinner" id="trigSp"></div></button>
-    <button class="btn bs" onclick="load()">­ƒöä Refresh</button>
+    <button class="btn bp" id="trigBtn" onclick="trigNow()">⚡ Run All Now <div class="spinner" id="trigSp"></div></button>
+    <button class="btn bs" onclick="load()">🔄 Refresh</button>
   </div>
 
-  <div class="footer"><a href="https://www.screener.in" target="_blank">screener.in Ôåù</a></div>
+  <div class="footer"><a href="https://www.screener.in" target="_blank">screener.in ↑</a></div>
 </div>
 
 <!-- Add/Edit Modal -->
@@ -1952,7 +2213,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-hei
   <div class="modal">
     <h2 id="modalTitle">Add Screener</h2>
     <div class="f"><label>ID (slug, no spaces)</label><input id="mId" placeholder="my-screen"></div>
-    <div class="f"><label>Name</label><input id="mName" placeholder="My Screen ÔÇö Description"></div>
+    <div class="f"><label>Name</label><input id="mName" placeholder="My Screen — Description"></div>
     <div class="f"><label>Screener.in URL</label><input id="mUrl" placeholder="https://www.screener.in/screens/..."></div>
     <div class="f"><label>Query</label><textarea id="mQuery" placeholder="Is not SME AND&#10;Market Capitalization > 200 AND&#10;..."></textarea></div>
     <div id="modalSchedSection">
@@ -1978,7 +2239,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-hei
       </div>
     </div>
     <div class="brow">
-      <button class="btn bp" onclick="saveScr()">­ƒÆ¥ Save</button>
+      <button class="btn bp" onclick="saveScr()">💾 Save</button>
       <button class="btn bs" onclick="closeModal()">Cancel</button>
     </div>
   </div>
@@ -1992,7 +2253,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t1);min-hei
     <div class="f"><label>Bot Token</label><input id="tgToken" placeholder="1234567890:AABBC..."></div>
     <div class="f"><label>Chat ID</label><input id="tgChatId" placeholder="1234567890"></div>
     <div class="brow">
-      <button class="btn bp" onclick="saveTg()">­ƒÆ¥ Save</button>
+      <button class="btn bp" onclick="saveTg()">💾 Save</button>
       <button class="btn bs" onclick="closeTgModal()">Cancel</button>
     </div>
   </div>
@@ -2020,11 +2281,11 @@ function updStatus(s){
   const en=_scrs.filter(x=>x.enabled!==false).length;
   if(s.enabled){
     d.className='sdot on';
-    t.innerHTML=`<b>Active</b> ┬À Per-Screener ┬À ${en} screener(s)`;
+    t.innerHTML=`<b>Active</b> · Per-Screener · ${en} screener(s)`;
   }else{
-    d.className='sdot off';t.innerHTML='<b>Paused</b> ┬À All cron triggers skipped';
+    d.className='sdot off';t.innerHTML='<b>Paused</b> · All cron triggers skipped';
   }
-  r.innerHTML=s.total_runs?'­ƒöó '+s.total_runs+' runs':'';
+  r.innerHTML=s.total_runs?'🔢 '+s.total_runs+' runs':'';
   const lr=document.getElementById('lrDisp');
   if(s.last_run){try{lr.value=new Date(s.last_run).toLocaleString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',day:'2-digit',month:'short',year:'numeric',hour12:true})}catch(e){lr.value=s.last_run}}
   else lr.value='Never';
@@ -2048,7 +2309,7 @@ function renderScrs(list){
             </select>
           </div>
           <div class="f"><label>Window</label>
-            <input type="text" value="${st} ÔÇô ${et}" readonly style="color:var(--t3);cursor:default;font-size:12px">
+            <input type="text" value="${st} – ${et}" readonly style="color:var(--t3);cursor:default;font-size:12px">
           </div>
         </div>
         <div class="fg">
@@ -2066,12 +2327,12 @@ function renderScrs(list){
         <div class="scr-dot ${s.enabled!==false?'on':'off'}"></div>
         <div class="scr-info">
           <div class="scr-name">${esc(s.name||s.id)}</div>
-          <div class="scr-url">${esc(s.url||'')} ┬À every ${s.interval_minutes||5}m</div>
+          <div class="scr-url">${esc(s.url||'')} · every ${s.interval_minutes||5}m</div>
         </div>
         <div class="scr-actions">
-          <button class="scr-btn" onclick="toggleScr('${s.id}')">${s.enabled!==false?'ÔÅ© Pause':'ÔûÂ Resume'}</button>
-          <button class="scr-btn" onclick="editScr('${s.id}')">Ô£Å´©Å</button>
-          <button class="scr-btn del" onclick="delScr('${s.id}')">­ƒùæ</button>
+          <button class="scr-btn" onclick="toggleScr('${s.id}')">${s.enabled!==false?'⏸ Pause':'▶ Resume'}</button>
+          <button class="scr-btn" onclick="editScr('${s.id}')">✏️</button>
+          <button class="scr-btn del" onclick="delScr('${s.id}')">🗑</button>
         </div>
       </div>
       ${schedHtml}
@@ -2148,16 +2409,16 @@ async function trigNow(){
   if(!enabled.length){toast('No enabled screeners','err');b.disabled=false;sp.style.display='none';return;}
   let done=0;
   for(const s of enabled){
-    toast(`ÔÜí Running ${s.name||s.id} (${++done}/${enabled.length})...`,'ok');
+    toast(`⚡ Running ${s.name||s.id} (${++done}/${enabled.length})...`,'ok');
     try{await fetch(A+'/api/trigger',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:s.id})})}
-    catch(e){toast(`ÔØî ${s.id} failed`,'err')}
+    catch(e){toast(`❌ ${s.id} failed`,'err')}
   }
-  toast(`Ô£à Done! Triggered ${done} screener(s)`,'ok');
+  toast(`✅ Done! Triggered ${done} screener(s)`,'ok');
   setTimeout(load,1000);
   b.disabled=false;sp.style.display='none';
 }
 
-// ÔöÇÔöÇ Telegram accounts ÔöÇÔöÇ
+// ── Telegram accounts ──
 function renderTg(list){
   const el=document.getElementById('tgList');
   if(!list.length){el.innerHTML='<div style="text-align:center;padding:24px;color:var(--t3)">No accounts. Click + Add.</div>';return}
@@ -2166,11 +2427,11 @@ function renderTg(list){
       <div class="scr-top">
         <div class="scr-dot on"></div>
         <div class="scr-info">
-          <div class="scr-name">­ƒô▒ ${esc(a.name||'Account '+(i+1))}</div>
-          <div class="scr-url">Chat: ${esc(a.chat_id)} ┬À Bot: ${esc(a.token.substring(0,12))}...</div>
+          <div class="scr-name">📱 ${esc(a.name||'Account '+(i+1))}</div>
+          <div class="scr-url">Chat: ${esc(a.chat_id)} · Bot: ${esc(a.token.substring(0,12))}...</div>
         </div>
         <div class="scr-actions">
-          <button class="scr-btn del" onclick="delTg(${i})">­ƒùæ</button>
+          <button class="scr-btn del" onclick="delTg(${i})">🗑</button>
         </div>
       </div>
     </div>`).join('');
