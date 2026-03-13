@@ -834,21 +834,21 @@ def calc_rsi_divergence(candles, period=14, lookback=5):
         return "bearish"
     return None
 
-def calc_52w_high_proximity(candles):
+def calc_range_high_proximity(candles):
     """
-    How close is current price to 52-week (or available data) high.
+    How close is current price to the highest high in the available window.
     Returns (pct_from_high, status).
     """
     if len(candles) < 10:
         return None, None
     highs = [c["high"] for c in candles]
-    high_52w = max(highs)
+    window_high = max(highs)
     current  = candles[-1]["close"]
-    if high_52w == 0:
+    if window_high == 0:
         return None, None
-    pct = round((current - high_52w) / high_52w * 100, 2)
+    pct = round((current - window_high) / window_high * 100, 2)
     if pct >= -5:
-        return pct, "Near ATH"
+        return pct, "Near High"
     elif pct >= -15:
         return pct, "Healthy"
     elif pct >= -30:
@@ -893,10 +893,18 @@ def analyze_timeframe(candles, tf_key, price):
     obv_val, obv_rising    = calc_obv(candles)
     cmf_val                = calc_cmf(candles, 20)
     psar_dir, psar_val     = calc_parabolic_sar(candles)
-    gc_status              = check_golden_cross(closes)
+    # Golden Cross is meaningful only on higher-timeframe datasets
+    if tf_key in {"month", "m2", "m3", "m6"}:
+        gc_status = check_golden_cross(closes)
+    else:
+        gc_status = None
     macd_accel             = macd_histogram_accelerating(closes)
     rsi_div                = calc_rsi_divergence(candles, 14, 5)
-    hi52_pct, hi52_status  = calc_52w_high_proximity(candles)
+    # Keep range-high proximity on swing/positional timeframes only
+    if tf_key in {"month", "m2", "m3", "m6"}:
+        hi52_pct, hi52_status = calc_range_high_proximity(candles)
+    else:
+        hi52_pct, hi52_status = None, None
     mfi_val                = calc_mfi(candles, 14)
     cci_val                = calc_cci(candles, 20)
     kc_lo, kc_mid, kc_hi   = calc_keltner(candles, 20, 1.5)
@@ -1079,13 +1087,13 @@ def analyze_timeframe(candles, tf_key, price):
     else:
         checks["RSI Divergence"] = (None, "⏳ No divergence")
 
-    # 21. 52-Week High Proximity
+    # 21. Range High Proximity (within available timeframe window)
     if hi52_pct is not None:
-        ok = hi52_status in ["Near ATH", "Healthy"]
-        checks["52W High"] = (ok,
+        ok = hi52_status in ["Near High", "Healthy"]
+        checks["Range High"] = (ok,
             f"{'✅' if ok else '❌'} {hi52_pct:+.1f}% from high ({hi52_status})")
     else:
-        checks["52W High"] = (None, "⏳ Insufficient history")
+        checks["Range High"] = (None, "⏳ Insufficient history")
 
     # 22. Money Flow Index (MFI)
     if mfi_val is not None:
@@ -1136,7 +1144,65 @@ def analyze_timeframe(candles, tf_key, price):
     scored = {k: v for k, v in checks.items() if v[0] is not None}
     score  = sum(1 for v in scored.values() if v[0])
     max_sc = len(scored)
-    pct    = round(score/max_sc*100) if max_sc > 0 else 0
+    raw_pct = round(score/max_sc*100) if max_sc > 0 else 0
+
+    # Category-weighted scoring to reduce correlated-indicator overcounting
+    # Each category contributes by weight, regardless of raw indicator count inside it.
+    category_weights = {
+        "trend": 0.34,
+        "momentum": 0.26,
+        "volume_flow": 0.24,
+        "regime": 0.16,
+    }
+    category_stats = {
+        "trend": {"passed": 0, "available": 0},
+        "momentum": {"passed": 0, "available": 0},
+        "volume_flow": {"passed": 0, "available": 0},
+        "regime": {"passed": 0, "available": 0},
+    }
+
+    def _check_category(name):
+        if name in {
+            "Trend (EMA9>21)", "EMA Ribbon", "Ichimoku Cloud", "Supertrend (7,3)",
+            "HH+HL Structure", "Price > EMA50", "Price > EMA200", "VWAP",
+            "Golden Cross", "Parabolic SAR", "Fib Position", "Range High"
+        }:
+            return "trend"
+        if name in {
+            "MACD", "RSI Zone", "Stochastic", "Awesome Osc", "Williams %R",
+            "MACD Momentum", "RSI Divergence", "CCI", "Candle Pattern"
+        }:
+            return "momentum"
+        if name in {
+            "Volume Surge", "OBV Trend", "CMF (Money Flow)", "MFI", "RVOL", "A/D Line"
+        }:
+            return "volume_flow"
+        if name in {"ADX Strength", "Bollinger Bands", "Keltner Channel", "ORB Breakout"}:
+            return "regime"
+        return "trend"
+
+    for check_name, (passed, _) in checks.items():
+        if passed is None:
+            continue
+        cat = _check_category(check_name)
+        category_stats[cat]["available"] += 1
+        if passed:
+            category_stats[cat]["passed"] += 1
+
+    weighted_num = 0.0
+    weighted_den = 0.0
+    category_breakdown = {}
+    for cat, w in category_weights.items():
+        av = category_stats[cat]["available"]
+        ps = category_stats[cat]["passed"]
+        if av == 0:
+            category_breakdown[cat] = {"passed": ps, "available": av, "pct": None}
+            continue
+        cat_pct = round(ps / av * 100)
+        category_breakdown[cat] = {"passed": ps, "available": av, "pct": cat_pct}
+        weighted_num += w * (ps / av)
+        weighted_den += w
+    pct = round(weighted_num / weighted_den * 100) if weighted_den > 0 else 0
 
     # Grade
     if   pct >= 85: grade = "A+"; signal = "STRONG BUY"
@@ -1178,9 +1244,11 @@ def analyze_timeframe(candles, tf_key, price):
         "score":       score,
         "max_score":   max_sc,
         "pct":         pct,
+        "raw_pct":     raw_pct,
         "grade":       grade,
         "signal":      signal,
         "bias":        bias,
+        "category_breakdown": category_breakdown,
         "checks":      {k: {"pass": v[0], "detail": v[1]} for k, v in checks.items()},
         "entry":       entry,
         "sl":          sl,
@@ -1328,13 +1396,6 @@ def aggregate_mtf(tf_results, price):
 
     overall_pct = round(bullish_weight/total_weight*100) if total_weight else 0
 
-    if   overall_pct >= 90: master = "💎 DIAMOND ALERT — High Accuracy Setup"
-    elif overall_pct >= 80: master = "🔥 STRONG BUY  — All timeframes aligned"
-    elif overall_pct >= 65: master = "✅ BUY         — Most timeframes bullish"
-    elif overall_pct >= 50: master = "🟡 WEAK BUY   — Mixed signals, caution"
-    elif overall_pct >= 35: master = "🟠 NEUTRAL    — Wait for clarity"
-    else:                   master = "🚫 AVOID      — Bearish across timeframes"
-
     # Best timeframe to act on
     best_tf = max(
         [(k, v) for k, v in tf_results.items() if v.get("pct", 0) > 0 and not v.get("error")],
@@ -1361,6 +1422,14 @@ def aggregate_mtf(tf_results, price):
     if rsi_bullish_count >= 6:
         buy_confluences.append(f"RSI bullish on {rsi_bullish_count}/8 timeframes")
         overall_pct = min(100, overall_pct + 5)  # 5% bonus
+
+    # Compute master signal from final overall_pct (post-bonus)
+    if   overall_pct >= 90: master = "💎 DIAMOND ALERT — High Accuracy Setup"
+    elif overall_pct >= 80: master = "🔥 STRONG BUY  — All timeframes aligned"
+    elif overall_pct >= 65: master = "✅ BUY         — Most timeframes bullish"
+    elif overall_pct >= 50: master = "🟡 WEAK BUY   — Mixed signals, caution"
+    elif overall_pct >= 35: master = "🟠 NEUTRAL    — Wait for clarity"
+    else:                   master = "🚫 AVOID      — Bearish across timeframes"
 
     return {
         "overall_pct":   overall_pct,
@@ -1439,6 +1508,8 @@ def format_master_alert(stock, screener_name, nifty_trend="Unknown"):
     overall = mtf.get("overall_pct", 0)
     master_sig = mtf.get("master_signal", "")
     is_diamond = "DIAMOND" in master_sig
+    below_min = bool(stock.get("below_min_score", False))
+    min_score = int(stock.get("min_score", 0) or 0)
     
     stars = "⭐️" * (overall // 20) if overall >= 20 else ""
     if not stars: stars = "❌"
@@ -1479,6 +1550,8 @@ def format_master_alert(stock, screener_name, nifty_trend="Unknown"):
         f"🏹 <b>Status:</b> {'Breakout' if vol_surge else 'Consol.'} (RSI: {rsi})",
         f"💪 <b>Strength:</b> {rs_text}",
     ]
+    if below_min and min_score > 0:
+        lines.append(f"⚠️ <b>Below threshold:</b> {overall}% &lt; {min_score}% (watchlist risk)")
     
     if sqz_text:
         lines.append(f"⚡ {sqz_text}")
@@ -1951,7 +2024,11 @@ class Default(WorkerEntrypoint):
         scr_query = screener["query"]
         scr_name = screener.get("name", sid)
         settings = await self._get_settings()
-        min_score = int(settings.get("min_score", 50))
+        try:
+            min_score = int(settings.get("min_score", 50))
+        except:
+            min_score = 50
+        min_score = max(0, min(100, min_score))
         now_str = ist_now().strftime("%d-%b-%Y %H:%M IST")
 
         try:
@@ -1994,6 +2071,7 @@ class Default(WorkerEntrypoint):
             exited  = [n for n in prev_names if n not in curr_names]
 
             sent_count = 0
+            below_threshold_count = 0
             nifty_trend = "Unknown"
             nifty_candles = []
             if curr_names:
@@ -2015,6 +2093,14 @@ class Default(WorkerEntrypoint):
                     stock = {"name": name, "symbol": symbol, "exchange": exchange,
                              "price": price, "change": d.get("% Chg", d.get("Chg %", "0"))}
                     enriched = await enrich_stock(stock, nifty_candles=nifty_candles)
+                    overall_pct = int(enriched.get("mtf_summary", {}).get("overall_pct", 0) or 0)
+                    if overall_pct < min_score:
+                        below_threshold_count += 1
+                        print(f"LOW-CONVICTION [{sid}] {symbol}: overall_pct={overall_pct} < min_score={min_score}")
+                        enriched["below_min_score"] = True
+                    else:
+                        enriched["below_min_score"] = False
+                    enriched["min_score"] = min_score
                     await self._send_all_stock(enriched, scr_name, nifty_trend)
                     sent_count += 1
 
@@ -2029,7 +2115,8 @@ class Default(WorkerEntrypoint):
             await self._send_all(
                 f"📈 <b>{scr_name}</b>\n"
                 f"✅ Cron run complete\n"
-                f"📊 Stocks found: <b>{len(rows)}</b> | Alerts sent: <b>{sent_count}</b>\n"
+                f"📊 Stocks found: <b>{len(rows)}</b> | Alerts sent: <b>{sent_count}</b> | "
+                f"Below threshold (&lt;{min_score}%): <b>{below_threshold_count}</b>\n"
                 f"🕐 {now_str}"
             )
 
