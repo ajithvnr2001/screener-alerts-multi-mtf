@@ -14,7 +14,7 @@ export default {
 };
 
 async function triggerAll(env) {
-    const results = { mtf: "skipped", multi: "skipped" };
+    const results = { mtf: "skipped" };
 
     if (env.MTF_WORKER) {
         try {
@@ -27,20 +27,6 @@ async function triggerAll(env) {
             results.mtf = resp.ok ? "ok" : `error:${resp.status}`;
         } catch (e) {
             results.mtf = `error:${e.message}`;
-        }
-    }
-
-    if (env.MULTI_WORKER) {
-        try {
-            const resp = await env.MULTI_WORKER.fetch(
-                new Request("https://screener-alerts-multi.ltimindtree.workers.dev/api/cron", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" }
-                })
-            );
-            results.multi = resp.ok ? "ok" : `error:${resp.status}`;
-        } catch (e) {
-            results.multi = `error:${e.message}`;
         }
     }
 

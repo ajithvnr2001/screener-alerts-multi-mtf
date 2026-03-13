@@ -9,7 +9,3 @@ crons = ["* * * * *"]  # fires every 1 minute
 [[services]]
 binding = "MTF_WORKER"
 service = "screener-alerts-mtf"
-
-[[services]]
-binding = "MULTI_WORKER"
-service = "screener-alerts-multi"
