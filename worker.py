@@ -4,6 +4,7 @@ from workers import Response, WorkerEntrypoint
 import json
 import math
 from datetime import datetime, time as dtime, timedelta
+import base64
 
 # ═══════════════════════════════════════════════════════════════════════
 # PRECONFIGURED SCREENERS
@@ -1680,6 +1681,24 @@ class Default(WorkerEntrypoint):
     async def fetch(self, request):
         url = str(request.url)
         method = str(request.method)
+
+        # WebDAV/Basic Authentication Check
+        if method != "OPTIONS":
+            auth = str(request.headers.get("Authorization") or "")
+            try:
+                expected_user = str(self.env.AUTH_USER)
+            except:
+                expected_user = "admin"
+            try:
+                expected_pass = str(self.env.AUTH_PASS)
+            except:
+                expected_pass = "admin"
+                
+            expected_b64 = base64.b64encode(f"{expected_user}:{expected_pass}".encode("utf-8")).decode("utf-8")
+            if auth != f"Basic {expected_b64}":
+                return Response("Unauthorized. Please login.", status=401, headers={
+                    "WWW-Authenticate": 'Basic realm="Screener Dashboard"'
+                })
 
         if "/api/settings" in url and method == "GET":
             return self._json(await self._get_settings())

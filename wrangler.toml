@@ -9,3 +9,7 @@ compatibility_flags = ["python_workers"]
 [[kv_namespaces]]
 binding = "KV"
 id = "f3e3966f90c84b7a8fd0f1f49b98d9a6"
+
+[vars]
+AUTH_USER = "admin"
+AUTH_PASS = "admin"
